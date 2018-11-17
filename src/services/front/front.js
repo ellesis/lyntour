@@ -18,25 +18,33 @@ class _Front extends Component {
 
   componentDidMount(){
     //ranks of countries with axios
-    axios.get(this.state.url + '/api/ranks.json?query=country')
-      .then((response) => {
-        console.log(response)
+    axios.get(this.state.url + '/api/ranks.json?depth=2')
+      .then((response)=>{
+        //console.log(response)
         this.props.update_toplist('1','country', response.data)
+      })
+      .catch((error)=>{
+        console.log(error)
       })
 
     //ranks of city
-    axios.get(this.state.url + '/api/ranks.json?query=city')
-      .then((response) => {
-        //alert(JSON.stringify(response.data))
+    axios.get(this.state.url + '/api/ranks.json?depth=3')
+      .then((response)=>{        
         this.props.update_toplist('2','city', response.data)
+      })
+      .catch((error)=>{
+        console.log(error)
       })
 
     //ranks of attractions
-    axios.get(this.state.url + '/api/ranks.json?query=attraction')
-      .then((response) => {
-        //alert(JSON.stringify(response.data))
+    axios.get(this.state.url + '/api/ranks.json?depth=4')
+      .then((response)=>{        
         this.props.update_toplist('3','attraction', response.data)
       })
+      .catch((error)=>{
+        console.log(error)
+      })
+
 
     axios.get(this.state.url + '/api/posts.json')
       .then((response) => {
